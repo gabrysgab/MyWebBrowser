@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyWebBrowser</string>
+    <string name="editTextHint">Enter URL</string>
+    <string name="urlScheme">https://</string>
+    <string name="buttonNextText">Next</string>
+    <string name="buttonOpenText">Open</string>
+    <string name="toastText">The given address isn\'t proper URL</string>
+</resources>

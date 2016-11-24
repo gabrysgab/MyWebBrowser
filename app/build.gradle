@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+def versionCodeVar = 2
+
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.sda.mgabrynowicz.mywebbrowser"
+        minSdkVersion 18
+        targetSdkVersion 24
+        versionCode versionCodeVar
+        versionName "1.0-" + versionCode
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String","someName", "\" Ala ma kota\""
+
+        resValue "string", "myCustomValue", "resource value from build config"
+
+    }
+
+    signingConfigs {
+        debugConfig {
+            storeFile file("debug.keystore")
+        }
+    }
+
+
+    productFlavors {
+
+        free{
+            buildConfigField "boolean", "isPremium", "false"
+            resValue "string", "myCustomValue", "resource in free flavour!"
+        }
+        premium {
+
+            buildConfigField "boolean", "isPremium", "true"
+            resValue "string", "myCustomValue", "resource in free flavour!"
+        }
+
+    }
+
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            buildConfigField "String", "someName", "\"This is debug\""
+
+
+        }
+
+        staging {
+
+            signingConfig signingConfigs.debug
+            buildConfigField("String", "someName", "\"This Is staging\"")
+
+
+
+
+        }
+
+
+
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+}
